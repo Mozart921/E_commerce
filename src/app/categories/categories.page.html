@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ categorie.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img [src]="categorie.imageUrl" [alt]="categorie.name">
+    <ion-card-header>
+      <ion-card-title>{{ categorie.name }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>{{ categorie.description }}</ion-card-content>
+  </ion-card>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let product of products">
+        <ion-card (click)="goToProduitDetail(product)">
+          <img [src]="product.imageUrl" [alt]="product.name">
+          <ion-card-header>
+            <ion-card-title>{{ product.name }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ product.description }}</p>
+            <p>{{ product.prix | currency:'EUR' }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
