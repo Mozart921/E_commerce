@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ product.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img [src]="product.imageUrl" [alt]="product.name">
+    <ion-card-header>
+      <ion-card-title>{{ product.name }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ product.description }}</p>
+      <p>{{ product.prix | currency:'EUR' }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-item *ngIf="product.enStock">
+    <ion-button expand="block" (click)="buyProduct()">AJOUTER AU PANIER</ion-button>
+    <ion-label>En stock</ion-label>
+  </ion-item>
+  <ion-item *ngIf="!product.enStock">
+    <ion-button expand="block" disabled>ÉPUISÉ</ion-button>
+    <ion-label>Stock épuisé</ion-label>
+  </ion-item>
+
+  <ion-title>PRODUITS SIMILAIRES</ion-title>
+
+  <ion-row>
+    <ion-col size="4" *ngFor="let relatedProduct of relatedProducts">
+      <ion-card class="ion-activatable" (click)="goToProduitDetail(relatedProduct)">
+        <img [src]="relatedProduct.imageUrl" [alt]="relatedProduct.name">
+        <ion-card-header>
+          <ion-card-title>{{ relatedProduct.name }}</ion-card-title>
+          <ion-card-subtitle>{{ relatedProduct.prix | currency:'EUR':'symbol' }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>{{ relatedProduct.description }}</ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>
