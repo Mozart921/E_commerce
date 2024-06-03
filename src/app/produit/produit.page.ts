@@ -73,7 +73,7 @@ export class ProduitPage implements OnInit {
       produitName: this.product.name,
       produitCategorie: this.product.categorie,
       productPrix: this.product.prix,
-      productPrixHT: this.product.prix * 0.7, // Calcul du prix HT
+      productPrixHT: this.product.prix * 0.7, 
       choixDate: new Date().toISOString(),
       quantité: 1,
       imageProduit: this.product.imageUrl,
@@ -125,7 +125,7 @@ export class ProduitPage implements OnInit {
         });
       });
       console.log(this.produits);
-      this.relatedProducts = this.getRelatedProducts(); // Obtenir les produits similaires après avoir récupéré tous les produits
+      this.relatedProducts = this.getRelatedProducts();
     });
   }
 
@@ -135,7 +135,6 @@ export class ProduitPage implements OnInit {
     }
     // Récupérer la catégorie du produit actuel
     const productCategory = this.product.categorie;
-    // Filtrer les produits par catégorie, exclure le produit actuel et limiter à 3 produits
     const relatedProducts = this.produits.filter(product => product.categorie === productCategory && product.id !== this.product.id).slice(0, 3);
     console.log("Produits similaires :", relatedProducts);
     return relatedProducts;
