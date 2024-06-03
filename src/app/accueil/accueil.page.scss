@@ -1,0 +1,55 @@
+.link-button {
+    color: black; /* Couleur du texte en noir */
+    text-decoration: none; /* Suppression du soulignement des liens */
+    margin-right: 10px; /* Espacement entre les liens */
+    font-family: Arial, sans-serif; /* Choix de la police d'écriture */
+  }
+
+  .rotate-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .rotate-col {
+    transform-origin: center;
+    transition: transform 0.5s ease;
+  }
+  
+  .rotate-col:hover {
+    transform: rotate(360deg);
+  }
+  .image-slider {
+    overflow-x: auto; /* Permet de faire défiler horizontalement */
+    white-space: nowrap; /* Empêche le saut de ligne */
+  }
+  
+  .image-container {
+    display: inline-block; /* Affiche les images côte à côte */
+    margin-right: 10px; /* Espace entre chaque image */
+  }
+  
+  .image-container img {
+    width: 100px; /* Ajustez la largeur de l'image selon vos besoins */
+    height: auto;
+  }
+  
+  .center-text {
+    display: flex;
+    flex-direction: column; /* Aligne les enfants en colonne */
+    justify-content: center; /* Centre verticalement */
+    align-items: center; /* Centre horizontalement */
+    text-align: center; /* Centre le texte */
+  }
+  
+  .center-text a {
+    font-size: 1em;
+  }
+
+  .espace1 {
+    margin-top: 1.5cm;
+}
+
+   .espace2 {
+    margin-bottom: 2cm;
+}
