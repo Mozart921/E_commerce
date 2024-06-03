@@ -80,11 +80,8 @@ export class AccueilPage implements OnInit {
   addToCart(product: any) {
     this.afAuth.authState.subscribe(user => {
       if (user) {
-        // User is signed in, add product to cart
         console.log("Produit ajouté au panier :", product);
-        // Ajoutez ici la logique pour ajouter le produit au panier
       } else {
-        // User is not signed in, redirect to login
         this.router.navigate(['/login'], {
           state: {
             returnUrl: '/accueil',
