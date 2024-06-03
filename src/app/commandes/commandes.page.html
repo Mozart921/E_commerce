@@ -1,0 +1,26 @@
+<div class="espace2"></div>
+<ion-content>
+  <div class="list-container">
+    <div *ngFor="let commande of commandes">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Commande du {{ commande.dateCommande | date: 'short' }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Nom: {{ commande.nom }}</p>
+          <p>Prénom: {{ commande.prenom }}</p>
+          <p>Adresse: {{ commande.adresse1 }}, {{ commande.adresse2 }}</p>
+          <p>Ville: {{ commande.ville }}</p>
+          <p>Région: {{ commande.region }}</p>
+          <p>Code Postal: {{ commande.CP }}</p>
+          <p>Pays: {{ commande.pays }}</p>
+          <p>Total: {{ commande.total | currency:'EUR' }}</p>
+          <p>Total HT: {{ commande.totalHT | currency:'EUR' }}</p>
+          <p>Statut: {{ commande.recu }}</p>
+          <ion-button *ngIf="commande.recu === 'en cours'" color="danger" (click)="deleteCommande(commande.id)">Supprimer</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+<div class="espace1"></div>
