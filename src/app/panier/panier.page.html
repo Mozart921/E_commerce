@@ -1,0 +1,92 @@
+<ion-content>
+  <div class="list-container">
+    <ion-list>
+      <ion-item *ngFor="let product of panier">
+        <ion-thumbnail slot="start">
+          <img [src]="product.imageUrl">
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{ product.name }}</h2>
+          <p>{{ product.categorie }}</p>
+          <p>{{ product.prix | currency:'EUR' }}</p>
+          <ion-item>
+            <ion-label>Quantité</ion-label>
+            <ion-input type="number" min="1" [(ngModel)]="product.quantity" (ionChange)="updateTotal()"></ion-input>
+          </ion-item>
+        </ion-label>
+        <ion-button slot="end" (click)="deleteProductFromPanier(product.id)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+      <div class="total-container">
+      <ion-button (click)="confirmCommande()">Passer la commande</ion-button>
+    </div>
+    <div class="total-container">
+      <p>Total: {{ total | currency:'EUR' }}  </p><br>
+    </div>
+
+    <div class="total-container">
+      <p>  Total HT: {{ totalHT | currency:'EUR' }}</p>
+    </div>
+    
+  <form *ngIf="envoi" (ngSubmit)="passerCommande()"> 
+    <ion-item>
+      <ion-label position="stacked">Prénom</ion-label>
+      <ion-input [(ngModel)]="commandeInfo.prenom" name="prenom" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Nom</ion-label>
+      <ion-input [(ngModel)]="commandeInfo.nom" name="nom" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Adresse 1</ion-label>
+      <ion-input [(ngModel)]="commandeInfo.adresse1" name="adresse1" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Adresse 2</ion-label>
+      <ion-input [(ngModel)]="commandeInfo.adresse2" name="adresse2"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Ville</ion-label>
+      <ion-input [(ngModel)]="commandeInfo.ville" name="ville" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Région</ion-label>
+      <ion-input [(ngModel)]="commandeInfo.region" name="region" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Code Postal</ion-label>
+      <ion-input [(ngModel)]="commandeInfo.codePostal" name="codePostal" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Pays</ion-label>
+      <ion-input [(ngModel)]="commandeInfo.pays" name="pays" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Numéro de téléphone mobile</ion-label>
+      <ion-input [(ngModel)]="commandeInfo.telMobile" name="telMobile" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Nom sur la carte</ion-label>
+      <ion-input [(ngModel)]="commandeInfo.nomCarte" name="nomCarte" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Numéro de carte</ion-label>
+      <ion-input [(ngModel)]="commandeInfo.numCarte" name="numCarte" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Date d'expiration</ion-label>
+      <ion-input [(ngModel)]="commandeInfo.dateExp" name="dateExp" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">CVV</ion-label>
+      <ion-input [(ngModel)]="commandeInfo.cvv" name="cvv" required></ion-input>
+    </ion-item>
+    <ion-button expand="block" type="submit">Confirmer la commande</ion-button>
+  </form>
+  <div class="total-container">
+    <ion-label>CONFIRMATION</ion-label>
+  </div>
+</ion-content>
