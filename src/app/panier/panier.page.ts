@@ -116,12 +116,11 @@ export class PanierPage implements OnInit {
       return;
     }
   
-    // Récupérer les données du panier de l'utilisateur
     this.afDB.list('panier/', ref => ref.orderByChild('userId').equalTo(this.userID)).snapshotChanges().pipe(take(1)).subscribe(actions => {
-      this.commande = []; // Initialiser la variable commande à un tableau vide
+      this.commande = []; 
       actions.forEach(action => {
         const data = action.payload.val();
-        this.commande.push({ // Ajouter les données de chaque produit du panier dans la commande
+        this.commande.push({
           id: action.key,
           name: action.payload.exportVal().produitName,
           categorie: action.payload.exportVal().produitCategorie,
@@ -133,13 +132,12 @@ export class PanierPage implements OnInit {
         });
       });
   
-      // Une fois que tous les produits du panier ont été ajoutés à la commande, vous pouvez maintenant passer la commande
       const commande = {
         userId: this.userID,
         email: this.email,
-        produits: this.commande, // Utiliser la commande créée à partir du contenu du panier
-        total: this.total, // Utiliser le total du panier
-        totalHT: this.totalHT, // Utiliser le total HT du panier
+        produits: this.commande, 
+        total: this.total, 
+        totalHT: this.totalHT, 
         dateCommande: new Date().toISOString(),
         nom: this.commandeInfo.nom,
         prenom: this.commandeInfo.prenom,
@@ -157,10 +155,8 @@ export class PanierPage implements OnInit {
         recu: 'en cours'
       };
   
-      // Ajouter la commande à la base de données
       this.afDB.list('commandes/').push(commande).then(() => {
         console.log('Commande passée avec succès!');
-        // Vous pouvez également vider le panier après la commande
         actions.forEach(action => {
           const key = action.key;
           if (key) {
@@ -172,7 +168,6 @@ export class PanierPage implements OnInit {
           }
         });
   
-        // Réinitialiser le panier et le total après avoir supprimé tous les produits
         this.panier = [];
         this.updateTotal();
       }).catch(error => {
