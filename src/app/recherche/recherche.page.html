@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Recherche</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <!-- Search Term -->
+    <ion-item>
+      <ion-label position="floating">Recherche</ion-label>
+      <ion-input [(ngModel)]="searchTerm" (ionInput)="onSearchTermChange()"></ion-input>
+    </ion-item>
+
+    <!-- Price Range -->
+    <ion-item>
+      <ion-label position="floating">Prix Min</ion-label>
+      <ion-input type="number" [(ngModel)]="minPrice" (ionChange)="onMinPriceChange()"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Prix Max</ion-label>
+      <ion-input type="number" [(ngModel)]="maxPrice" (ionChange)="onMaxPriceChange()"></ion-input>
+    </ion-item>
+
+    <!-- Categories -->
+    <ion-item>
+      <ion-label>Catégorie</ion-label>
+      <ion-select [(ngModel)]="categories" multiple="true" (ionChange)="onCategoryChange()">
+        <ion-select-option *ngFor="let category of categoriesList" [value]="category">{{category}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- In Stock Only -->
+    <ion-item>
+      <ion-label>En Stock Seulement</ion-label>
+      <ion-toggle [(ngModel)]="inStockOnly" (ionChange)="onInStockOnlyChange()"></ion-toggle>
+    </ion-item>
+
+    <!-- Sort By -->
+    <ion-item>
+      <ion-label>Trier par</ion-label>
+      <ion-select [(ngModel)]="sortField" (ionChange)="onSortFieldChange()">
+        <ion-select-option value="prix">Prix</ion-select-option>
+        <ion-select-option value="dateAdded">Nouveauté</ion-select-option>
+        <ion-select-option value="enStock">En Stock</ion-select-option>
+      </ion-select>
+      <ion-segment [(ngModel)]="sortOrder" (ionChange)="onSortOrderChange()">
+        <ion-segment-button value="asc">
+          <ion-label>Ascendant</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="desc">
+          <ion-label>Descendant</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-item>
+  </ion-list>
+
+  <!-- Search Results -->
+  <ion-list>
+    <ion-item *ngFor="let produit of filteredProduits" (click)="goToProduitDetail(produit)">
+      <ion-thumbnail slot="start">
+        <img [src]="produit.imageUrl" [alt]="produit.name">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ produit.name }}</h2>
+        <p>{{ produit.description }}</p>
+        <p>{{ produit.prix | currency:'EUR':'symbol' }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
